@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://qe26ileki1ey"]
+
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="1_3agvd"]
+[ext_resource type="Script" path="res://Scripts/InventoryManager.gd" id="3_6feim"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid_ex.gd" id="3_fe6sr"]
+[ext_resource type="PackedScene" uid="uid://c8govo5bdtd17" path="res://World/world.tscn" id="3_vq328"]
+[ext_resource type="StyleBox" uid="uid://leu14efjhqsr" path="res://InventoryInstance/inventory_instance.tres" id="4_4jkdw"]
+[ext_resource type="Texture2D" uid="uid://b2hkcwwq10cut" path="res://icon.png" id="5_tsbhc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gm83"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0.576471)
+
+[node name="Game" type="Node3D"]
+script = ExtResource("1_3agvd")
+
+[node name="ContainerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("../Containers")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://addons/fpc/character.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="Containers" type="Node3D" parent="."]
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="InventoryManager" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_6feim")
+
+[node name="PlayerInventory" type="Panel" parent="InventoryManager"]
+layout_mode = 0
+offset_left = 615.0
+offset_top = 16.0
+offset_right = 1135.0
+offset_bottom = 630.0
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gm83")
+
+[node name="MarginContainer" type="MarginContainer" parent="InventoryManager/PlayerInventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_bottom = 32
+
+[node name="CtrlInventoryGridEx" type="Control" parent="InventoryManager/PlayerInventory"]
+custom_minimum_size = Vector2(384, 288)
+layout_mode = 2
+anchors_preset = 0
+offset_left = 68.0
+offset_top = 294.0
+offset_right = 452.0
+offset_bottom = 582.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("3_fe6sr")
+field_style = ExtResource("4_4jkdw")
+field_dimensions = Vector2(48, 48)
+draw_selections = true
+default_item_texture = ExtResource("5_tsbhc")
+
+[node name="World" parent="." instance=ExtResource("3_vq328")]

@@ -1,0 +1,53 @@
+[gd_scene load_steps=4 format=3 uid="uid://1n7u1xrluf2"]
+
+[ext_resource type="Script" path="res://Scenes/stashmain.gd" id="1_imwro"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid_ex.gd" id="2_skhtn"]
+[ext_resource type="StyleBox" uid="uid://leu14efjhqsr" path="res://InventoryInstance/inventory_instance.tres" id="3_y5ogu"]
+
+[node name="StashMain" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_imwro")
+
+[node name="PlayerStashes" type="Node2D" parent="."]
+
+[node name="StashSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Scenes/stash.tscn")
+spawn_path = NodePath("../PlayerStashes")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel2" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -629.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerStashCtrl" type="Control" parent="Panel2/ScrollContainer"]
+texture_filter = 1
+layout_mode = 2
+script = ExtResource("2_skhtn")
+field_style = ExtResource("3_y5ogu")
+field_dimensions = Vector2(48, 48)

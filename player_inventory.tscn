@@ -1,0 +1,631 @@
+[gd_scene load_steps=13 format=3 uid="uid://4kct0p46qhpx"]
+
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid_ex.gd" id="1_eqns1"]
+[ext_resource type="StyleBox" uid="uid://leu14efjhqsr" path="res://InventoryInstance/inventory_instance.tres" id="2_2uqnh"]
+[ext_resource type="Texture2D" uid="uid://b2hkcwwq10cut" path="res://icon.png" id="3_f4im0"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_item_rect.gd" id="4_a07ss"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_drop_zone.gd" id="5_2sitp"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory_grid.gd" id="6_6s8nb"]
+[ext_resource type="Resource" uid="uid://cxc4g76khiw4k" path="res://ItemProtoset.tres" id="7_hpkrf"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory_item.gd" id="8_l66vn"]
+[ext_resource type="Script" path="res://Scenes/BackpackContainer.gd" id="9_3a6or"]
+[ext_resource type="Script" path="res://Scenes/InvSlot.gd" id="10_eokan"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_item_slot_ex.gd" id="11_j2kjt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gm83"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0.576471)
+
+[node name="PlayerInventory" type="MarginContainer"]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -868.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gm83")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="CtrlInventoryGridEx" type="Control" parent="Panel/MarginContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(384, 288)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_eqns1")
+field_style = ExtResource("2_2uqnh")
+field_dimensions = Vector2(48, 48)
+draw_selections = true
+inventory_path = NodePath("../InventoryGrid")
+default_item_texture = ExtResource("3_f4im0")
+
+[node name="_Control_17473" type="Control" parent="Panel/MarginContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+
+[node name="_Panel_17474" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_right = 48.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17475" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_top = 48.0
+offset_right = 48.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17476" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 48.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17477" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_top = 144.0
+offset_right = 48.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17478" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_top = 192.0
+offset_right = 48.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17479" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_top = 240.0
+offset_right = 48.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17480" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_right = 96.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17481" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 48.0
+offset_right = 96.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17482" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17483" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 144.0
+offset_right = 96.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17484" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 192.0
+offset_right = 96.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17485" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 240.0
+offset_right = 96.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17486" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_right = 144.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17487" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 48.0
+offset_right = 144.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17488" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 96.0
+offset_right = 144.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17489" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 144.0
+offset_right = 144.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17490" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 192.0
+offset_right = 144.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17491" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 96.0
+offset_top = 240.0
+offset_right = 144.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17492" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_right = 192.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17493" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 48.0
+offset_right = 192.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17494" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 96.0
+offset_right = 192.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17495" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 144.0
+offset_right = 192.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17496" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 192.0
+offset_right = 192.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17497" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 144.0
+offset_top = 240.0
+offset_right = 192.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17498" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_right = 240.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17499" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 48.0
+offset_right = 240.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17500" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 96.0
+offset_right = 240.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17501" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 144.0
+offset_right = 240.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17502" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 192.0
+offset_right = 240.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17503" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 192.0
+offset_top = 240.0
+offset_right = 240.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17504" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_right = 288.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17505" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 48.0
+offset_right = 288.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17506" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 96.0
+offset_right = 288.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17507" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 144.0
+offset_right = 288.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17508" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 192.0
+offset_right = 288.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17509" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 240.0
+offset_right = 288.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17510" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_right = 336.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17511" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 48.0
+offset_right = 336.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17512" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 96.0
+offset_right = 336.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17513" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 144.0
+offset_right = 336.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17514" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 192.0
+offset_right = 336.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17515" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 288.0
+offset_top = 240.0
+offset_right = 336.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17516" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_right = 384.0
+offset_bottom = 48.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17517" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 48.0
+offset_right = 384.0
+offset_bottom = 96.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17518" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 96.0
+offset_right = 384.0
+offset_bottom = 144.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17519" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 144.0
+offset_right = 384.0
+offset_bottom = 192.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17520" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 192.0
+offset_right = 384.0
+offset_bottom = 240.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17521" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17473"]
+layout_mode = 0
+offset_left = 336.0
+offset_top = 240.0
+offset_right = 384.0
+offset_bottom = 288.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Control_17466" type="Control" parent="Panel/MarginContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_Control_17470" type="Control" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17466"]
+anchors_preset = 0
+offset_right = 96.0
+offset_bottom = 96.0
+script = ExtResource("4_a07ss")
+
+[node name="_Control_17471" type="Control" parent="Panel/MarginContainer/CtrlInventoryGridEx/_Control_17466"]
+anchors_preset = 0
+offset_top = 96.0
+offset_right = 96.0
+offset_bottom = 192.0
+script = ExtResource("4_a07ss")
+
+[node name="_Control_17467" type="Control" parent="Panel/MarginContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+offset_right = 384.0
+offset_bottom = 288.0
+mouse_filter = 2
+script = ExtResource("5_2sitp")
+
+[node name="_Panel_17472" type="Panel" parent="Panel/MarginContainer/CtrlInventoryGridEx"]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
+[node name="InventoryGrid" type="Node" parent="Panel/MarginContainer"]
+script = ExtResource("6_6s8nb")
+size = Vector2i(8, 6)
+item_protoset = ExtResource("7_hpkrf")
+
+[node name="_Node_34943" type="Node" parent="Panel/MarginContainer/InventoryGrid"]
+script = ExtResource("8_l66vn")
+protoset = ExtResource("7_hpkrf")
+prototype_id = "TestItem3"
+
+[node name="_Node_38859" type="Node" parent="Panel/MarginContainer/InventoryGrid"]
+script = ExtResource("8_l66vn")
+protoset = ExtResource("7_hpkrf")
+prototype_id = "TestItem3"
+properties = {
+"grid_position": Vector2i(0, 2)
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="BackpackContainer" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 200)
+layout_mode = 2
+script = ExtResource("9_3a6or")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer"]
+custom_minimum_size = Vector2(490, 100)
+layout_mode = 1
+offset_right = 490.0
+offset_bottom = 100.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="InvSlot" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+script = ExtResource("10_eokan")
+
+[node name="CtrlItemSlotEx" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot"]
+z_index = 10
+z_as_relative = false
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+anchors_preset = 0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 24.0
+offset_bottom = 24.0
+script = ExtResource("11_j2kjt")
+slot_style = ExtResource("2_2uqnh")
+label_visible = false
+
+[node name="_Panel_17465" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_HBoxContainer_17522" type="HBoxContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx"]
+layout_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_Control_17523" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx/_HBoxContainer_17522"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("4_a07ss")
+
+[node name="_Label_17525" type="Label" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx/_HBoxContainer_17522"]
+visible = false
+layout_mode = 2
+
+[node name="_Control_17524" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx"]
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
+mouse_filter = 2
+script = ExtResource("5_2sitp")
+
+[node name="@Panel@44781" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx"]
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="VSeparator" type="VSeparator" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="CtrlInventoryGridEx" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("1_eqns1")
+field_style = ExtResource("2_2uqnh")
+field_dimensions = Vector2(64, 64)
+drag_sprite_z_index = 10
+
+[node name="_Control_17531" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+
+[node name="_Panel_17532" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17531"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17533" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17531"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 64.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17534" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17531"]
+layout_mode = 0
+offset_left = 32.0
+offset_right = 64.0
+offset_bottom = 32.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Panel_17535" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17531"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 64.0
+offset_bottom = 64.0
+theme_override_styles/panel = ExtResource("2_2uqnh")
+
+[node name="_Control_17526" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_Control_17529" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17526"]
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("4_a07ss")
+
+[node name="_Control_17527" type="Control" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 100.0
+mouse_filter = 2
+script = ExtResource("5_2sitp")
+
+[node name="_Panel_17530" type="Panel" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="resized" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer" method="_on_h_box_container_resized"]
+[connection signal="on_item_dropped" from="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx" to="Panel/MarginContainer/ScrollContainer/VBoxContainer/BackpackContainer" method="_on_ctrl_item_slot_ex_on_item_dropped"]

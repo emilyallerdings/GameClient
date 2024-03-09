@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0pruoapxihil"]
+
+[ext_resource type="Script" path="res://InventoryInstance/InventoryInstance.gd" id="1_8i8jx"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid_ex.gd" id="2_jybuc"]
+[ext_resource type="StyleBox" uid="uid://leu14efjhqsr" path="res://InventoryInstance/inventory_instance.tres" id="3_onb75"]
+[ext_resource type="Texture2D" uid="uid://b2hkcwwq10cut" path="res://icon.png" id="4_58vmi"]
+
+[node name="InventoryInstance" type="Control"]
+custom_minimum_size = Vector2(320, 320)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 320.0
+mouse_filter = 2
+script = ExtResource("1_8i8jx")
+
+[node name="CtrlInventoryGridEx" type="Control" parent="."]
+custom_minimum_size = Vector2(320, 320)
+anchors_preset = 0
+offset_top = 31.0
+offset_right = 320.0
+offset_bottom = 351.0
+script = ExtResource("2_jybuc")
+field_style = ExtResource("3_onb75")
+draw_selections = true
+default_item_texture = ExtResource("4_58vmi")
+
+[node name="Button" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_left = 290.0
+offset_right = 322.0
+offset_bottom = 32.0
+text = "X"
+clip_text = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
+offset_right = 288.0
+offset_bottom = 32.0
+mouse_filter = 1
+color = Color(0.184314, 0.184314, 0.184314, 1)
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="mouse_entered" from="ColorRect" to="." method="_on_color_rect_mouse_entered"]
+[connection signal="mouse_exited" from="ColorRect" to="." method="_on_color_rect_mouse_exited"]

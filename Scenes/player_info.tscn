@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://8wt34pxry782"]
+
+[ext_resource type="Script" path="res://Scripts/player_info.gd" id="1_es1jo"]
+
+[node name="PlayerInfo" type="HBoxContainer"]
+script = ExtResource("1_es1jo")
+
+[node name="PlayerID" type="Label" parent="."]
+layout_mode = 2
+text = "ID: "
+
+[node name="ID" type="Label" parent="."]
+layout_mode = 2
+text = "0"
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayerName" type="Label" parent="."]
+layout_mode = 2
+text = "Player Name: "
+
+[node name="NAME" type="Label" parent="."]
+layout_mode = 2
+text = "NAME"
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Ready" type="Label" parent="."]
+layout_mode = 2
+text = "Ready:"
+
+[node name="CheckBox" type="CheckBox" parent="."]
+layout_mode = 2
+button_mask = 0

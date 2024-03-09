@@ -1,0 +1,343 @@
+[gd_scene load_steps=20 format=3 uid="uid://b26g8v1jbylf0"]
+
+[ext_resource type="Script" path="res://Scripts/Client.gd" id="1_w43rs"]
+[ext_resource type="Script" path="res://Scripts/Game.gd" id="2_36tt8"]
+[ext_resource type="Script" path="res://Scripts/InventoryManager.gd" id="3_4rlf5"]
+[ext_resource type="PackedScene" uid="uid://c8govo5bdtd17" path="res://World/world.tscn" id="4_53sau"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_grid_ex.gd" id="4_vky2i"]
+[ext_resource type="Script" path="res://Scenes/PlayerInventory.gd" id="5_8uwhj"]
+[ext_resource type="StyleBox" uid="uid://leu14efjhqsr" path="res://InventoryInstance/inventory_instance.tres" id="5_ge5mp"]
+[ext_resource type="Texture2D" uid="uid://eo7ybmjyuch4" path="res://Assets/guy.png" id="6_4xjiv"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_inventory_item_rect.gd" id="8_nd55r"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory_grid.gd" id="8_w8wrt"]
+[ext_resource type="Resource" uid="uid://cxc4g76khiw4k" path="res://ItemProtoset.tres" id="9_b8cd2"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_drop_zone.gd" id="9_itxn0"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory_item.gd" id="10_f6vjk"]
+[ext_resource type="Script" path="res://Scenes/InvSlot.gd" id="11_ng2v5"]
+[ext_resource type="Script" path="res://Scenes/BackpackContainer.gd" id="11_uf518"]
+[ext_resource type="Script" path="res://addons/gloot/ui/ctrl_item_slot_ex.gd" id="11_x5c08"]
+[ext_resource type="Script" path="res://Scenes/InventoryContainers.gd" id="14_2wtjt"]
+[ext_resource type="Script" path="res://Scenes/PocketsContainer.gd" id="14_rn1kb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gm83"]
+bg_color = Color(0.145098, 0.145098, 0.145098, 0.576471)
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_w43rs")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -200.0
+offset_right = 72.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 20.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label2" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Name:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextEdit" type="TextEdit" parent="Panel/VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 2
+placeholder_text = "Name"
+scroll_fit_content_height = true
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+text = "Local:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckButton" type="CheckButton" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Start"
+
+[node name="Panel2" type="Panel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -420.0
+offset_top = -244.5
+offset_right = 420.0
+offset_bottom = 244.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="PlayerList" type="VBoxContainer" parent="Panel2/MarginContainer"]
+layout_mode = 2
+
+[node name="ReadyButton" type="Button" parent="Panel2"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -33.5
+offset_top = -69.0
+offset_right = 33.5
+offset_bottom = -38.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "READY?"
+
+[node name="Game" type="Node3D" parent="."]
+script = ExtResource("2_36tt8")
+
+[node name="ContainerSpawner" type="MultiplayerSpawner" parent="Game"]
+_spawnable_scenes = PackedStringArray("res://Scenes/Container.tscn")
+spawn_path = NodePath("../Containers")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Game"]
+_spawnable_scenes = PackedStringArray("res://addons/fpc/character.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="Containers" type="Node3D" parent="Game"]
+
+[node name="Players" type="Node3D" parent="Game"]
+
+[node name="InventoryManager" type="Control" parent="Game"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("3_4rlf5")
+
+[node name="World" parent="Game" instance=ExtResource("4_53sau")]
+
+[node name="PlayerInventory" type="Control" parent="Game"]
+visible = false
+layout_mode = 3
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1920.0
+offset_right = -852.0
+grow_horizontal = 0
+grow_vertical = 2
+script = ExtResource("5_8uwhj")
+
+[node name="Panel" type="Panel" parent="Game/PlayerInventory"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 168.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gm83")
+
+[node name="MarginContainer" type="Control" parent="Game/PlayerInventory/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer"]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 820.0
+offset_bottom = 1032.0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 451.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+
+[node name="Guy" type="Sprite2D" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/Panel"]
+position = Vector2(191, 340)
+scale = Vector2(0.630669, 0.719861)
+texture = ExtResource("6_4xjiv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="BackpackContainer" type="Panel" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(800, 200)
+layout_mode = 2
+script = ExtResource("11_uf518")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer"]
+custom_minimum_size = Vector2(490, 100)
+layout_mode = 1
+offset_right = 797.0
+offset_bottom = 191.0
+
+[node name="CenterContainer" type="CenterContainer" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+
+[node name="InvSlot" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer"]
+layout_mode = 2
+script = ExtResource("11_ng2v5")
+
+[node name="CtrlItemSlotEx" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_x5c08")
+slot_style = ExtResource("5_ge5mp")
+label_visible = false
+
+[node name="VSeparator" type="VSeparator" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="CtrlInventoryGridEx" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("4_vky2i")
+field_style = ExtResource("5_ge5mp")
+field_dimensions = Vector2(48, 48)
+drag_sprite_z_index = 10
+
+[node name="_Control_17531" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+
+[node name="_Control_17526" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="_Control_17529" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx/_Control_17526"]
+anchors_preset = 0
+offset_right = 32.0
+offset_bottom = 32.0
+script = ExtResource("8_nd55r")
+
+[node name="_Control_17527" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+anchors_preset = 0
+offset_right = 200.0
+offset_bottom = 171.0
+mouse_filter = 2
+script = ExtResource("9_itxn0")
+
+[node name="_Panel_17530" type="Panel" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CtrlInventoryGridEx"]
+visible = false
+layout_mode = 0
+mouse_filter = 2
+
+[node name="PocketsContainer" type="PanelContainer" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("14_rn1kb")
+
+[node name="PocketsCtrlInv" type="Control" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/PocketsContainer"]
+custom_minimum_size = Vector2(384, 288)
+layout_mode = 2
+script = ExtResource("4_vky2i")
+field_style = ExtResource("5_ge5mp")
+field_dimensions = Vector2(48, 48)
+draw_selections = true
+inventory_path = NodePath("InventoryGrid")
+
+[node name="InventoryGrid" type="Node" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/PocketsContainer/PocketsCtrlInv"]
+script = ExtResource("8_w8wrt")
+size = Vector2i(8, 6)
+item_protoset = ExtResource("9_b8cd2")
+
+[node name="_Node_34943" type="Node" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/PocketsContainer/PocketsCtrlInv/InventoryGrid"]
+script = ExtResource("10_f6vjk")
+protoset = ExtResource("9_b8cd2")
+prototype_id = "TestItem3"
+
+[node name="_Node_38859" type="Node" parent="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/PocketsContainer/PocketsCtrlInv/InventoryGrid"]
+script = ExtResource("10_f6vjk")
+protoset = ExtResource("9_b8cd2")
+prototype_id = "TestItem3"
+properties = {
+"grid_position": Vector2i(0, 2)
+}
+
+[node name="Dragables" type="Node3D" parent="Game"]
+
+[node name="InventoryContainers" type="Node3D" parent="Game"]
+script = ExtResource("14_2wtjt")
+
+[node name="InvContainerSpawner" type="MultiplayerSpawner" parent="Game"]
+_spawnable_scenes = PackedStringArray("res://Scenes/inventory.tscn")
+spawn_path = NodePath("../InventoryContainers")
+
+[connection signal="pressed" from="Panel/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Panel2/ReadyButton" to="." method="_on_ready_button_pressed"]
+[connection signal="resized" from="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer" to="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer" method="_on_h_box_container_resized"]
+[connection signal="on_item_dropped" from="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer/HBoxContainer/CenterContainer/InvSlot/CtrlItemSlotEx" to="Game/PlayerInventory/Panel/MarginContainer/ScrollContainer/HBoxContainer/VBoxContainer/BackpackContainer" method="_on_ctrl_item_slot_ex_on_item_dropped"]

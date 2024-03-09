@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsb6033m5sym7"]
+
+[ext_resource type="Script" path="res://Scenes/stash.gd" id="1_kv2d6"]
+[ext_resource type="PackedScene" uid="uid://tj2kypqk7g02" path="res://Scenes/inventory.tscn" id="2_la7dc"]
+
+[node name="Stash" type="Node2D"]
+script = ExtResource("1_kv2d6")
+
+[node name="Inventory" parent="." instance=ExtResource("2_la7dc")]
